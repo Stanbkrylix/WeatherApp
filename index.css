@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+}
+html {
+    font-size: 62.5%;
+}
+body {
+    background-color: #171718;
+    display: flex;
+    justify-content: center;
+}
+.main-container {
+    background-color: #0c4160;
+    color: #c3ceda;
+    padding: 2rem;
+    width: 1200px;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.date {
+    font-size: 1.5em;
+}
+.search-input-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+.search-bar {
+    display: flex;
+    align-items: center;
+    border: 1px solid black;
+    padding: 0.5rem;
+    border-radius: 2.5rem;
+
+    background-color: #222222;
+    color: white;
+}
+.search-input {
+    border-radius: 2.5rem;
+    height: 100%;
+    padding: 0.5rem;
+    font-size: 1em;
+    background-color: #222222;
+    color: white;
+    border: none;
+}
+.search-input:focus {
+    outline: none;
+}
+.temp-change-div {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+    border: 1px solid black;
+    padding: 0.5rem;
+    border-radius: 2.5rem;
+    width: 80px;
+    background-color: #222222;
+    color: white;
+}
+.celsius-temp {
+    color: white;
+}
+.fare-temp {
+    color: white;
+}
+
+.temp-change-div a {
+    font-size: 1em;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+}
+.temp-selected {
+    background-color: #66b6d3;
+    color: black;
+    border-radius: 2.5rem;
+}
+
+/* ============= main body =============== */
+
+.city-info {
+    font-size: 1.5rem;
+}
+.city-temp {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    /* border: 1px solid black; */
+    height: 100px;
+}
+.city-temp h2 {
+    font-size: 2em;
+    margin-bottom: 0.5rem;
+}
+.city-temp p {
+    font-size: 1.5;
+}
+.hourly-temp-cards {
+    border: 1px solid black;
+    display: flex;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    justify-content: center;
+    font-size: 1em;
+    gap: 1rem;
+    padding: 1rem;
+    overflow-x: auto;
+}
+.hourly-card {
+    border: 1px solid black;
+    padding: 1rem;
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    color: black;
+    background-color: #fff;
+    background-color: #66b6d3;
+    width: 120px;
+}
+
+/* media query */
+@media (max-width: 1200px) {
+    .main-container {
+        width: 100%;
+    }
+    .hourly-temp-cards {
+    }
+}

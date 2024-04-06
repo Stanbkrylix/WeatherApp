@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="index.css" />
+        <title>Weather App</title>
+    </head>
+    <body>
+        <article class="main-container">
+            <!-- header -->
+            <section class="header">
+                <p class="date">Mon, 15 May, 2023</p>
+                <div class="search-input-div">
+                    <div class="search-bar">
+                        <span class="material-symbols-outlined">search</span>
+                        <input
+                            type="text"
+                            name=""
+                            class="search-input"
+                            placeholder="Search city"
+                        />
+                    </div>
+                    <!--  -->
+                    <div class="temp-change-div">
+                        <a href="#" class="celsius-temp temp-selected"> C </a>
+                        <a href="#" class="fare-temp"> F </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- main-body -->
+
+            <section class="main-body">
+                <div class="city-info">
+                    <div class="city-temp">
+                        <h1 class="weather-behavior">Sunny</h1>
+
+                        <div class="city-country">
+                            <h2 class="city">Berlin</h2>
+                            <p class="country">Germany</p>
+                        </div>
+
+                        <div class="temperature">
+                            <h2 class="temp-value">+20c</h2>
+                            <p class="temp">Temperature</p>
+                        </div>
+
+                        <div class="city-humidity">
+                            <h2 class="humidity-value">24%</h2>
+                            <p class="humidity-p">Humidity</p>
+                        </div>
+
+                        <div class="city-wind-speed">
+                            <h2 class="wind-speed-value">13 Km/h</h2>
+                            <p class="wind-speed-p">Wind Speed</p>
+                        </div>
+                    </div>
+
+                    <!-- cards of temps -->
+                    <div class="hourly-temp-cards">
+                        <div class="hourly-card">
+                            <p class="time">8 am</p>
+                            <span class="material-symbols-outlined"
+                                >thunderstorm</span
+                            >
+                            <p class="hourly-temp">21</p>
+                        </div>
+
+                        <div class="hourly-card">
+                            <p class="time">9 am</p>
+                            <span class="material-symbols-outlined"
+                                >cloudy</span
+                            >
+                            <p class="hourly-temp">21</p>
+                        </div>
+                        <div class="hourly-card">
+                            <p class="time">10 am</p>
+                            <span class="material-symbols-outlined">sunny</span>
+                            <p class="hourly-temp">21</p>
+                        </div>
+
+                        <div class="hourly-card">
+                            <p class="time">8 am</p>
+                            <span class="material-symbols-outlined"
+                                >thunderstorm</span
+                            >
+                            <p class="hourly-temp">21</p>
+                        </div>
+
+                        <div class="hourly-card">
+                            <p class="time">9 am</p>
+                            <span class="material-symbols-outlined"
+                                >cloudy</span
+                            >
+                            <p class="hourly-temp">21</p>
+                        </div>
+                        <div class="hourly-card">
+                            <p class="time">10 am</p>
+                            <span class="material-symbols-outlined">sunny</span>
+                            <p class="hourly-temp">21</p>
+                        </div>
+                        <div class="hourly-card">
+                            <p class="time">8 am</p>
+                            <span class="material-symbols-outlined"
+                                >thunderstorm</span
+                            >
+                            <p class="hourly-temp">21</p>
+                        </div>
+
+                        <div class="hourly-card">
+                            <p class="time">9 am</p>
+                            <span class="material-symbols-outlined"
+                                >cloudy</span
+                            >
+                            <p class="hourly-temp">21</p>
+                        </div>
+                        <div class="hourly-card">
+                            <p class="time">10 am</p>
+                            <span class="material-symbols-outlined">sunny</span>
+                            <p class="hourly-temp">21</p>
+                        </div>
+                        <div class="hourly-card">
+                            <p class="time">8 am</p>
+                            <span class="material-symbols-outlined"
+                                >thunderstorm</span
+                            >
+                            <p class="hourly-temp">21</p>
+                        </div>
+
+                        <div class="hourly-card">
+                            <p class="time">9 am</p>
+                            <span class="material-symbols-outlined"
+                                >cloudy</span
+                            >
+                            <p class="hourly-temp">21</p>
+                        </div>
+                        <div class="hourly-card">
+                            <p class="time">10 am</p>
+                            <span class="material-symbols-outlined">sunny</span>
+                            <p class="hourly-temp">21</p>
+                        </div>
+                    </div>
+
+                    <!-- <div class="city-time-temp"></div> -->
+                </div>
+
+                <!-- forcast section -->
+                <div class="forcast-info">
+                    <!-- forcast header -->
+                    <div class="forcast-header">
+                        <h1 class="forcasts-p">Forcasts</h1>
+                        <p class="forcasts-days">7 days</p>
+                    </div>
+
+                    <div class="forcast-cards">
+                        <div class="forcast-card">
+                            <span class="material-symbols-outlined">cloud</span>
+                            <h2 class="forcast-temp">+22</h2>
+                            <p class="forcast-date">
+                                <span class="f-date">16 </span>
+                                may, Tue
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </article>
+        <script type="module" src="index.js"></script>
+    </body>
+</html>
