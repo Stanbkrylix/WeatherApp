@@ -8,12 +8,12 @@ html {
     font-size: 62.5%;
 }
 body {
-    background-color: #171718;
+    background-color: #191a1b;
     display: flex;
     justify-content: center;
 }
 .main-container {
-    background-color: #0c4160;
+    /* background-color: #1e1e1f; */
     color: #c3ceda;
     padding: 2rem;
     width: 1200px;
@@ -22,7 +22,8 @@ body {
     display: flex;
     justify-content: space-between;
     font-size: 1.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
+    /* border-radius: 1; */
 }
 
 .date {
@@ -41,7 +42,7 @@ body {
     padding: 0.5rem;
     border-radius: 2.5rem;
 
-    background-color: #222222;
+    background-color: #292a2c;
     color: white;
 }
 .search-input {
@@ -49,7 +50,8 @@ body {
     height: 100%;
     padding: 0.5rem;
     font-size: 1em;
-    background-color: #222222;
+    /* background-color: #1e1e1f; */
+    background-color: #292a2c;
     color: white;
     border: none;
 }
@@ -64,7 +66,7 @@ body {
     padding: 0.5rem;
     border-radius: 2.5rem;
     width: 80px;
-    background-color: #222222;
+    background-color: #292a2c;
     color: white;
 }
 .celsius-temp {
@@ -89,6 +91,10 @@ body {
 
 .city-info {
     font-size: 1.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid black;
+    border-radius: 2rem;
+    background-color: #292a2c;
 }
 .city-temp {
     display: flex;
@@ -106,7 +112,7 @@ body {
     font-size: 1.5;
 }
 .hourly-temp-cards {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     display: flex;
     flex-wrap: nowrap;
     white-space: nowrap;
@@ -128,6 +134,52 @@ body {
     background-color: #fff;
     background-color: #66b6d3;
     width: 120px;
+}
+
+/* =============== forecast info =======*/
+
+.forecast-info {
+    font-size: 1.5rem;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+    /* border: 1px solid black; */
+    border: 1px solid black;
+    border-radius: 2rem;
+    background-color: #292a2c;
+}
+.forecast-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.forecast-header h1 {
+    font-size: 2em;
+}
+
+.forecast-header p {
+    border: 1px solid black;
+    padding: 0.8rem 1rem;
+    border-radius: 2.5rem;
+    text-align: center;
+    font-size: 1.1em;
+    color: white;
+    background-color: #191a1b;
+}
+
+.forecast-cards {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    /* flex-direction: column; */
+}
+.forecast-card {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* justify-content: center; */
+    gap: 0.5rem;
 }
 
 /* media query */
