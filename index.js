@@ -71,7 +71,7 @@ function renderCityTemp(
 async function getWeather() {
     try {
         const weather = await fetch(
-            " http://api.weatherapi.com/v1/forecast.json?key=0c02a0dc0c144d058d864439242303&q=tampa"
+            " http://api.weatherapi.com/v1/forecast.json?key=0c02a0dc0c144d058d864439242303&q=berlin"
         );
         const weatherData = await weather.json();
         console.log(weatherData);
@@ -83,8 +83,8 @@ async function getWeather() {
             : weatherData.current.temp_f + " Far";
         const humidityValue = weatherData.current.humidity;
         const windSpeedValue = celOrFar
-            ? weatherData.current.gust_kph + " Kph"
-            : weatherData.current.gust_mph + " Mph";
+            ? weatherData.current.wind_kph + " Kph"
+            : weatherData.current.wind_mph + " Mph";
 
         renderCityTemp(
             city,
@@ -94,6 +94,8 @@ async function getWeather() {
             windSpeedValue,
             weatherImg
         );
+        const hours = weatherData.forecast.forecastday[0];
+        renderCards(hours);
         console.log(weatherImg);
     } catch (error) {
         console.log(error);
@@ -150,4 +152,165 @@ function getCurrentMonth(month) {
         default:
             return "invalid Month";
     }
+}
+
+function greaterThan12(number) {
+    if (number === 13) {
+        return 1;
+    }
+    if (number === 14) {
+        return 2;
+    }
+    if (number === 15) {
+        return 3;
+    }
+    if (number === 16) {
+        return 4;
+    }
+    if (number === 17) {
+        return 5;
+    }
+    if (number === 18) {
+        return 6;
+    }
+    if (number === 19) {
+        return 7;
+    }
+    if (number === 20) {
+        return 8;
+    }
+    if (number === 21) {
+        return 9;
+    }
+    if (number === 22) {
+        return 10;
+    }
+    if (number === 23) {
+        return 11;
+    }
+
+    return "";
+}
+
+function getDayTimes(string) {
+    let currentDate = new Date(string);
+
+    const time = currentDate.getHours();
+    const amOrPm = time < 12 ? "am" : "pm";
+
+    switch (time) {
+        case 0:
+            return `${time} ${amOrPm}`;
+        case 1:
+            return `${time} ${amOrPm}`;
+
+        case 2:
+            return `${time} ${amOrPm}`;
+
+        case 3:
+            return `${time} ${amOrPm}`;
+
+        case 4:
+            return `${time} ${amOrPm}`;
+
+        case 5:
+            return `${time} ${amOrPm}`;
+
+        case 6:
+            return `${time} ${amOrPm}`;
+
+        case 7:
+            return `${time} ${amOrPm}`;
+
+        case 8:
+            return `${time} ${amOrPm}`;
+
+        case 9:
+            return `${time} ${amOrPm}`;
+
+        case 10:
+            return `${time} ${amOrPm}`;
+
+        case 11:
+            return `${time} ${amOrPm}`;
+
+        case 12:
+            return `${time} ${amOrPm}`;
+
+        case 13:
+            return `${greaterThan12(time)} ${amOrPm}`;
+
+        case 14:
+            return `${greaterThan12(time)} ${amOrPm}`;
+
+        case 15:
+            return `${greaterThan12(time)} ${amOrPm}`;
+
+        case 16:
+            return `${greaterThan12(time)} ${amOrPm}`;
+
+        case 17:
+            return `${greaterThan12(time)} ${amOrPm}`;
+
+        case 18:
+            return `${greaterThan12(time)} ${amOrPm}`;
+
+        case 19:
+            return `${greaterThan12(time)} ${amOrPm}`;
+
+        case 20:
+            return `${greaterThan12(time)} ${amOrPm}`;
+
+        case 21:
+            return `${greaterThan12(time)} ${amOrPm}`;
+        case 22:
+            return `${greaterThan12(time)} ${amOrPm}`;
+        case 23:
+            return `${greaterThan12(time)} ${amOrPm}`;
+
+        default:
+            return "invalid Times";
+    }
+}
+
+function renderCards(cardsData) {
+    const cardsDiv = document.querySelector(".hourly-temp-cards");
+    cardsDiv.innerHTML = "";
+    console.log(cardsData);
+
+    cardsData.hour.forEach((value, index) => {
+        cardsDiv.innerHTML += `
+        <div class="hourly-card">
+            <p class="time">${getDayTimes(value.time)}</p>
+            <span class="material-symbols-outlined"
+                >
+                <img src ="https:${
+                    value.condition.icon
+                }" alt="weather symbol"></span
+            >
+            <p>${index}</p>
+            <p class="hourly-temp">${value.temp_c}</p>
+        </div>
+
+        `;
+
+        console.log(getDayTimes(value.time));
+        console.log(value.condition.icon);
+    });
+}
+function hourCard(value, index) {
+    return `
+    <div class="hourly-card">
+        <p class="time">${getDayTimes(value.time)}</p>
+        <span class="material-symbols-outlined"
+            >
+            <img src ="https:${
+                value.condition.icon
+            }" alt="weather symbol"></span
+        >
+        <p>${index}</p>
+        <p class="hourly-temp">${value.temp_c}</p>
+    </div>
+    
+    `;
 }

@@ -94,10 +94,12 @@ body {
 /* ============= main body =============== */
 
 .city-info {
+    width: 100%;
+    /* width: max-content; */
     font-size: 1.5rem;
     margin-bottom: 2rem;
     border: 1px solid black;
-    border-radius: 2rem;
+    border-radius: 2rem 2rem 1.5rem 1.5rem;
     background-color: #292a2c;
 }
 .city-temp {
@@ -117,16 +119,33 @@ body {
 }
 .hourly-temp-cards {
     /* border: 1px solid black; */
+    width: 100%;
     display: flex;
     flex-wrap: nowrap;
-    white-space: nowrap;
-    justify-content: center;
+    /* white-space: nowrap; */
+    justify-content: baseline;
     font-size: 1em;
     gap: 1rem;
     padding: 1rem;
     overflow-x: auto;
 }
+.hourly-temp-cards::-webkit-scrollbar {
+    width: 10px;
+    height: 15px;
+    border-radius: 5px;
+}
+.hourly-temp-cards::-webkit-scrollbar-track {
+    background-color: #111111;
+    border-radius: 0 0 2rem 2rem;
+}
+
+.hourly-temp-cards::-webkit-scrollbar-thumb {
+    background-color: #292a2c;
+    border-radius: 0 0 2rem 2rem;
+}
+
 .hourly-card {
+    flex: 0 0 auto;
     border: 1px solid black;
     padding: 1rem;
     border-radius: 2rem;
