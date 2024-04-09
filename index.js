@@ -71,7 +71,7 @@ function renderCityTemp(
 async function getWeather() {
     try {
         const weather = await fetch(
-            " http://api.weatherapi.com/v1/forecast.json?key=0c02a0dc0c144d058d864439242303&q=berlin"
+            " http://api.weatherapi.com/v1/forecast.json?key=0c02a0dc0c144d058d864439242303&q=berlin&days=7"
         );
         const weatherData = await weather.json();
         console.log(weatherData);
@@ -94,14 +94,37 @@ async function getWeather() {
             windSpeedValue,
             weatherImg
         );
+
         const hours = weatherData.forecast.forecastday[0];
         renderCards(hours);
+
+        const daysForecast = weatherData.forecast.forecastday;
+        renderForecastDays(daysForecast);
         console.log(weatherImg);
     } catch (error) {
         console.log(error);
     }
 }
 getWeather();
+
+function changeDateFormat(date) {
+    // remove the 0s at the beginning of each number
+    let originalDate = date;
+    let parts = originalDate.split("-");
+    let newDate =
+        parts[0] + "-" + parseInt(parts[1], 10) + "-" + parseInt(parts[2], 10);
+
+    // use new date value to regenerate string;
+    const currentDate = new Date(newDate);
+    const dateVal = `${getCurrentDay(
+        currentDate.getDay()
+    )}, ${currentDate.getDate()} ${getCurrentMonth(
+        currentDate.getMonth()
+    )}, ${currentDate.getFullYear()}
+    `;
+
+    return dateVal;
+}
 
 function getCurrentDay(day) {
     switch (day) {
@@ -276,29 +299,13 @@ function getDayTimes(string) {
 function renderCards(cardsData) {
     const cardsDiv = document.querySelector(".hourly-temp-cards");
     cardsDiv.innerHTML = "";
-    console.log(cardsData);
+    // console.log(cardsData);
 
-    cardsData.hour.forEach((value, index) => {
-        cardsDiv.innerHTML += `
-        <div class="hourly-card">
-            <p class="time">${getDayTimes(value.time)}</p>
-            <span class="material-symbols-outlined"
-                >
-                <img src ="https:${
-                    value.condition.icon
-                }" alt="weather symbol"></span
-            >
-            <p>${index}</p>
-            <p class="hourly-temp">${value.temp_c}</p>
-        </div>
-
-        `;
-
-        console.log(getDayTimes(value.time));
-        console.log(value.condition.icon);
+    cardsData.hour.forEach((value) => {
+        cardsDiv.innerHTML += hourCard(value);
     });
 }
-function hourCard(value, index) {
+function hourCard(value) {
     return `
     <div class="hourly-card">
         <p class="time">${getDayTimes(value.time)}</p>
@@ -308,9 +315,41 @@ function hourCard(value, index) {
                 value.condition.icon
             }" alt="weather symbol"></span
         >
-        <p>${index}</p>
-        <p class="hourly-temp">${value.temp_c}</p>
+        <p class="hourly-temp">${
+            celOrFar ? value.temp_c + " cel" : value.temp_f + " far"
+        }</p>
     </div>
     
     `;
+}
+
+function renderForecastDays(forecastday) {
+    const forecastCardDiv = document.querySelector(".forecast-cards");
+    forecastCardDiv.innerHTML = "";
+
+    forecastday.forEach((value) => {
+        // console.log(changeDateFormat(value.date));
+        forecastCardDiv.innerHTML += forecastCard(value);
+    });
+}
+
+function forecastCard(value) {
+    const card = `
+    <div class="forecast-card">
+        <span class="material-symbols-outlined">
+        <img src ="https:${value.day.condition.icon}" alt="weather symbol">
+        </span>
+        <h2 class="forecast-temp">${
+            celOrFar
+                ? value.day.avgtemp_c + " cel"
+                : value.day.avgtemp_f + " far"
+        }</h2>
+        <p class="forecast-date">
+            ${changeDateFormat(value.date)}
+        </p>
+    </div>
+
+    `;
+
+    return card;
 }
