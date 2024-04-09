@@ -62,6 +62,22 @@ body {
 .search-input:focus {
     outline: none;
 }
+
+.search-btn {
+    padding: 0.5rem;
+    font-size: 1em;
+    border-radius: 0 2.5rem 2.5rem 0;
+    height: 100%;
+    border: none;
+    background-color: #fff;
+    color: #111111;
+    transition: 250ms;
+}
+.search-btn:hover {
+    background-color: #66b6d3;
+    cursor: pointer;
+    transform: scale(1.1);
+}
 .temp-change-div {
     display: flex;
     justify-content: space-around;

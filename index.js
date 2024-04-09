@@ -2,7 +2,29 @@
 
 const celsiusTemp = document.querySelector(".celsius-temp");
 const fareTemp = document.querySelector(".fare-temp");
+const searchBtn = document.querySelector(".search-btn");
+let currentCity = "berlin";
+
 let celOrFar = true;
+
+getWeather(currentCity);
+
+searchBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    const inputSearch = document.querySelector(".search-input");
+
+    if (
+        inputSearch.value === null ||
+        inputSearch.value === "undefined" ||
+        inputSearch.value === "".trim()
+    ) {
+        return;
+    } else {
+        currentCity = inputSearch.value;
+        getWeather(currentCity);
+        inputSearch.value = "";
+    }
+});
 
 function displayDate() {
     const currentDateP = document.querySelector(".header .date");
@@ -27,7 +49,7 @@ function changeWeather() {
             target.classList.add("temp-selected");
             fareTemp.classList.remove("temp-selected");
             celOrFar = true;
-            getWeather();
+            getWeather(currentCity);
         }
     });
 
@@ -38,11 +60,12 @@ function changeWeather() {
             target.classList.add("temp-selected");
             celsiusTemp.classList.remove("temp-selected");
             celOrFar = false;
-            getWeather();
+            getWeather(currentCity);
         }
     });
 }
 changeWeather();
+
 function renderCityTemp(
     city,
     country,
@@ -68,13 +91,18 @@ function renderCityTemp(
     // weatherImg.src = `https://cdn.weatherapi.com/weather/64x64/day/116.png`;
     weatherImg.src = `https:${imgSrc}`;
 }
-async function getWeather() {
+async function getWeather(wantedCity) {
     try {
         const weather = await fetch(
-            " http://api.weatherapi.com/v1/forecast.json?key=0c02a0dc0c144d058d864439242303&q=berlin&days=7"
+            ` http://api.weatherapi.com/v1/forecast.json?key=0c02a0dc0c144d058d864439242303&q=${wantedCity}&days=7`
         );
         const weatherData = await weather.json();
-        console.log(weatherData);
+
+        // error handling
+        if (!weather.ok) {
+            throw new Error(weatherData.error.message);
+        }
+
         const weatherImg = weatherData.current.condition.icon;
         const city = weatherData.location.name;
         const country = weatherData.location.country;
@@ -100,15 +128,70 @@ async function getWeather() {
 
         const daysForecast = weatherData.forecast.forecastday;
         renderForecastDays(daysForecast);
-        console.log(weatherImg);
     } catch (error) {
-        console.log(error);
+        renderError(error.message);
     }
 }
-getWeather();
+
+function renderCards(cardsData) {
+    const cardsDiv = document.querySelector(".hourly-temp-cards");
+    cardsDiv.innerHTML = "";
+
+    cardsData.hour.forEach((value) => {
+        cardsDiv.innerHTML += hourCard(value);
+    });
+}
+
+function renderForecastDays(forecastday) {
+    const forecastCardDiv = document.querySelector(".forecast-cards");
+    forecastCardDiv.innerHTML = "";
+
+    forecastday.forEach((value) => {
+        forecastCardDiv.innerHTML += forecastCard(value);
+    });
+}
+
+function hourCard(value) {
+    return `
+    <div class="hourly-card">
+        <p class="time">${getDayTimes(value.time)}</p>
+        <span class="material-symbols-outlined"
+            >
+            <img src ="https:${
+                value.condition.icon
+            }" alt="weather symbol"></span
+        >
+        <p class="hourly-temp">${
+            celOrFar ? value.temp_c + " cel" : value.temp_f + " far"
+        }</p>
+    </div>
+    
+    `;
+}
+
+function forecastCard(value) {
+    const card = `
+    <div class="forecast-card">
+        <span class="material-symbols-outlined">
+        <img src ="https:${value.day.condition.icon}" alt="weather symbol">
+        </span>
+        <h2 class="forecast-temp">${
+            celOrFar
+                ? value.day.avgtemp_c + " cel"
+                : value.day.avgtemp_f + " far"
+        }</h2>
+        <p class="forecast-date">
+            ${changeDateFormat(value.date)}
+        </p>
+    </div>
+
+    `;
+
+    return card;
+}
 
 function changeDateFormat(date) {
-    // remove the 0s at the beginning of each number
+    // remove the 0s at the beginning of each number in date argument
     let originalDate = date;
     let parts = originalDate.split("-");
     let newDate =
@@ -124,6 +207,23 @@ function changeDateFormat(date) {
     `;
 
     return dateVal;
+}
+
+function renderError(message) {
+    const city1 = document.querySelector(".city");
+    const country1 = document.querySelector(".country");
+    const tempValue1 = document.querySelector(".temp-value");
+    const humidityValue1 = document.querySelector(".humidity-value");
+    const windSpeedValue1 = document.querySelector(".wind-speed-value");
+
+    const weatherImg = document.querySelector(".weather-img");
+
+    city1.textContent = message;
+    country1.textContent = message;
+    tempValue1.textContent = message;
+    humidityValue1.textContent = message;
+    windSpeedValue1.textContent = message;
+    //
 }
 
 function getCurrentDay(day) {
@@ -294,62 +394,4 @@ function getDayTimes(string) {
         default:
             return "invalid Times";
     }
-}
-
-function renderCards(cardsData) {
-    const cardsDiv = document.querySelector(".hourly-temp-cards");
-    cardsDiv.innerHTML = "";
-    // console.log(cardsData);
-
-    cardsData.hour.forEach((value) => {
-        cardsDiv.innerHTML += hourCard(value);
-    });
-}
-function hourCard(value) {
-    return `
-    <div class="hourly-card">
-        <p class="time">${getDayTimes(value.time)}</p>
-        <span class="material-symbols-outlined"
-            >
-            <img src ="https:${
-                value.condition.icon
-            }" alt="weather symbol"></span
-        >
-        <p class="hourly-temp">${
-            celOrFar ? value.temp_c + " cel" : value.temp_f + " far"
-        }</p>
-    </div>
-    
-    `;
-}
-
-function renderForecastDays(forecastday) {
-    const forecastCardDiv = document.querySelector(".forecast-cards");
-    forecastCardDiv.innerHTML = "";
-
-    forecastday.forEach((value) => {
-        // console.log(changeDateFormat(value.date));
-        forecastCardDiv.innerHTML += forecastCard(value);
-    });
-}
-
-function forecastCard(value) {
-    const card = `
-    <div class="forecast-card">
-        <span class="material-symbols-outlined">
-        <img src ="https:${value.day.condition.icon}" alt="weather symbol">
-        </span>
-        <h2 class="forecast-temp">${
-            celOrFar
-                ? value.day.avgtemp_c + " cel"
-                : value.day.avgtemp_f + " far"
-        }</h2>
-        <p class="forecast-date">
-            ${changeDateFormat(value.date)}
-        </p>
-    </div>
-
-    `;
-
-    return card;
 }
