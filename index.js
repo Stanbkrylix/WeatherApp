@@ -88,7 +88,6 @@ function renderCityTemp(
     humidityValue1.textContent = `${humidityValue}%`;
     windSpeedValue1.textContent = `${windSpeedValue}`;
 
-    // weatherImg.src = `https://cdn.weatherapi.com/weather/64x64/day/116.png`;
     weatherImg.src = `https:${imgSrc}`;
 }
 async function getWeather(wantedCity) {
@@ -103,6 +102,7 @@ async function getWeather(wantedCity) {
             throw new Error(weatherData.error.message);
         }
 
+        // retrieving data
         const weatherImg = weatherData.current.condition.icon;
         const city = weatherData.location.name;
         const country = weatherData.location.country;
@@ -151,6 +151,23 @@ function renderForecastDays(forecastday) {
     });
 }
 
+function renderError(message) {
+    const city1 = document.querySelector(".city");
+    const country1 = document.querySelector(".country");
+    const tempValue1 = document.querySelector(".temp-value");
+    const humidityValue1 = document.querySelector(".humidity-value");
+    const windSpeedValue1 = document.querySelector(".wind-speed-value");
+
+    const weatherImg = document.querySelector(".weather-img");
+
+    city1.textContent = message;
+    country1.textContent = message;
+    tempValue1.textContent = message;
+    humidityValue1.textContent = message;
+    windSpeedValue1.textContent = message;
+    //
+}
+
 function hourCard(value) {
     return `
     <div class="hourly-card">
@@ -190,6 +207,7 @@ function forecastCard(value) {
     return card;
 }
 
+// helper function for formatting dates
 function changeDateFormat(date) {
     // remove the 0s at the beginning of each number in date argument
     let originalDate = date;
@@ -207,23 +225,6 @@ function changeDateFormat(date) {
     `;
 
     return dateVal;
-}
-
-function renderError(message) {
-    const city1 = document.querySelector(".city");
-    const country1 = document.querySelector(".country");
-    const tempValue1 = document.querySelector(".temp-value");
-    const humidityValue1 = document.querySelector(".humidity-value");
-    const windSpeedValue1 = document.querySelector(".wind-speed-value");
-
-    const weatherImg = document.querySelector(".weather-img");
-
-    city1.textContent = message;
-    country1.textContent = message;
-    tempValue1.textContent = message;
-    humidityValue1.textContent = message;
-    windSpeedValue1.textContent = message;
-    //
 }
 
 function getCurrentDay(day) {
