@@ -93,7 +93,7 @@ function renderCityTemp(
 async function getWeather(wantedCity) {
     try {
         const weather = await fetch(
-            ` http://api.weatherapi.com/v1/forecast.json?key=0c02a0dc0c144d058d864439242303&q=${wantedCity}&days=7`
+            ` https://api.weatherapi.com/v1/forecast.json?key=0c02a0dc0c144d058d864439242303&q=${wantedCity}&days=7`
         );
         const weatherData = await weather.json();
 
